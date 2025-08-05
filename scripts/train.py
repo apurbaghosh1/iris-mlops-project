@@ -11,8 +11,10 @@ from sklearn.metrics import accuracy_score
 import warnings
 import joblib
 
+
 # Suppress warnings
 warnings.filterwarnings("ignore")
+
 
 def load_and_preprocess_data(data_path='data/iris.csv'):
     print("1. Loading and preprocessing data...")
@@ -20,17 +22,18 @@ def load_and_preprocess_data(data_path='data/iris.csv'):
     X = df.iloc[:, :-1]
     y = df.iloc[:, -1]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-    
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
     print("Data loading and preprocessing complete.")
     return X_train_scaled, X_test_scaled, y_train, y_test, scaler
 
+
 def train_model(model, model_name, params, X_train, y_train, X_test, y_test, scaler):
     """Trains a model and logs it to MLflow, returning the run_id."""
     print(f"\n--- Training {model_name} ---")
-    with mlflow.start_run(run_name=model_name) as run:
+    # Removed 'as run' since the 'run' variable was not used, fixing F841
+    with mlflow.start_run(run_name=model_name):
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
         accuracy = accuracy_score(y_test, y_pred)
@@ -38,7 +41,7 @@ def train_model(model, model_name, params, X_train, y_train, X_test, y_test, sca
 
         mlflow.log_params(params)
         mlflow.log_metric("accuracy", accuracy)
-        
+
         signature = mlflow.models.infer_signature(X_train, model.predict(X_train))
         mlflow.sklearn.log_model(
             sk_model=model,
@@ -46,13 +49,14 @@ def train_model(model, model_name, params, X_train, y_train, X_test, y_test, sca
             signature=signature,
             input_example=X_train[:5]
         )
-        
+
         scaler_path = "scaler.joblib"
         joblib.dump(scaler, scaler_path)
         mlflow.log_artifact(scaler_path, artifact_path="scaler")
-        
+
         print(f"Successfully logged '{model_name}'.")
         return mlflow.active_run().info.run_id
+
 
 if __name__ == "__main__":
     # --- THIS IS THE CRITICAL CHANGE ---
@@ -65,14 +69,14 @@ if __name__ == "__main__":
 
     EXPERIMENT_NAME = "Iris_Classification_Final"
     mlflow.set_experiment(EXPERIMENT_NAME)
-    
+
     X_train, X_test, y_train, y_test, scaler = load_and_preprocess_data()
 
     # --- Train and Register Logistic Regression ---
     lr_params = {"model_type": "LogisticRegression"}
     lr_model = LogisticRegression(random_state=42)
     lr_run_id = train_model(lr_model, "LogisticRegression", lr_params, X_train, y_train, X_test, y_test, scaler)
-    
+
     # This registration logic works perfectly with a remote server.
     # MLflow knows to make an API call to register the model.
     lr_model_uri = f"runs:/{lr_run_id}/model"
@@ -89,4 +93,5 @@ if __name__ == "__main__":
     mlflow.register_model(model_uri=rf_model_uri, name="Iris-RandomForest")
 
     print("\n\nWorkflow Complete. Models have been sent to the MLflow server.")
-    print(f"Check the UI at http://127.0.0.1:5002")
+    # Removed 'f' prefix from string without placeholders to fix F541
+    print("Check the UI at http://127.0.0.1:5002")
