@@ -1,0 +1,34 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  # Service 1: The MLflow Tracking Server
+  mlflow-server:
+    build:
+      context: .
+      dockerfile: mlflow.Dockerfile
+    ports:
+      # Expose the MLflow UI on your machine at port 5002
+      - "5002:5000"
+    networks:
+      - ml-network
+
+  # Service 2: The Flask API
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile # Your existing API Dockerfile
+    ports:
+      # Expose the API on your machine at port 8002
+      - "8002:8000"
+    depends_on:
+      # Tells Docker to start the mlflow-server first
+      - mlflow-server
+    networks:
+      - ml-network
+
+# Define the private network for the containers to communicate
+networks:
+  ml-network:
+    driver: bridge

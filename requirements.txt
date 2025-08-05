@@ -1,0 +1,7 @@
+pandas
+scikit-learn
+mlflow
+joblib
+Flask
+gunicorn
+prometheus-flask-exporter
