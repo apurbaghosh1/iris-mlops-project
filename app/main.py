@@ -108,4 +108,3 @@ def predict_species():
 if __name__ == '__main__':
     mlflow.set_tracking_uri("http://127.0.0.1:5002")
     app.run(host='0.0.0.0', port=8000, debug=True)
-    
