@@ -5,3 +5,5 @@ joblib
 Flask
 gunicorn
 prometheus-flask-exporter
+pydantic<2
+flask-pydantic
