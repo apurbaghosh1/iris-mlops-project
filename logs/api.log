@@ -1,0 +1,519 @@
+2025-08-06 06:11:44,361 INFO: API Logger is now configured. [in /app/app/main.py:40]
+2025-08-06 06:11:44,361 INFO: --- Starting Model Loading Process using Aliases --- [in /app/app/main.py:55]
+2025-08-06 06:11:44,361 INFO: Attempt 1/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-06 06:11:44,362 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-06 06:11:44,376 WARNING: --> No registered models found on the MLflow server. [in /app/app/main.py:66]
+2025-08-06 06:11:44,376 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-06 06:11:44,440 ERROR: Attempt 1 failed: RESOURCE_DOES_NOT_EXIST: Registered Model with name=Iris-LogisticRegression not found [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 115, in _download_artifact_from_uri
+    repo = get_artifact_repository(artifact_uri=root_uri, tracking_uri=tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/artifact_repository_registry.py", line 144, in get_artifact_repository
+    return _artifact_repository_registry.get_artifact_repository(artifact_uri, tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/artifact_repository_registry.py", line 82, in get_artifact_repository
+    return repository(artifact_uri, tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 73, in __init__
+    ) = ModelsArtifactRepository._get_model_uri_infos(artifact_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 124, in _get_model_uri_infos
+    name_and_version_or_id = get_model_name_and_version(client, uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/utils/models.py", line 146, in get_model_name_and_version
+    mv = client.get_model_version_by_alias(model_name, model_alias)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/_model_registry/client.py", line 455, in get_model_version_by_alias
+    return self.store.get_model_version_by_alias(name, alias)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/model_registry/rest_store.py", line 480, in get_model_version_by_alias
+    response_proto = self._call_endpoint(GetModelVersionByAlias, req_body)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/model_registry/base_rest_store.py", line 42, in _call_endpoint
+    return call_endpoint(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/utils/rest_utils.py", line 594, in call_endpoint
+    response = verify_rest_response(response, endpoint)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/utils/rest_utils.py", line 308, in verify_rest_response
+    raise RestException(json.loads(response.text))
+mlflow.exceptions.RestException: RESOURCE_DOES_NOT_EXIST: Registered Model with name=Iris-LogisticRegression not found
+2025-08-06 06:11:44,444 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-06 06:11:54,456 INFO: Attempt 2/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-06 06:11:54,459 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-06 06:11:54,468 WARNING: --> No registered models found on the MLflow server. [in /app/app/main.py:66]
+2025-08-06 06:11:54,469 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-06 06:11:54,474 ERROR: Attempt 2 failed: RESOURCE_DOES_NOT_EXIST: Registered Model with name=Iris-LogisticRegression not found [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 115, in _download_artifact_from_uri
+    repo = get_artifact_repository(artifact_uri=root_uri, tracking_uri=tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/artifact_repository_registry.py", line 144, in get_artifact_repository
+    return _artifact_repository_registry.get_artifact_repository(artifact_uri, tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/artifact_repository_registry.py", line 82, in get_artifact_repository
+    return repository(artifact_uri, tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 73, in __init__
+    ) = ModelsArtifactRepository._get_model_uri_infos(artifact_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 124, in _get_model_uri_infos
+    name_and_version_or_id = get_model_name_and_version(client, uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/utils/models.py", line 146, in get_model_name_and_version
+    mv = client.get_model_version_by_alias(model_name, model_alias)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/_model_registry/client.py", line 455, in get_model_version_by_alias
+    return self.store.get_model_version_by_alias(name, alias)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/model_registry/rest_store.py", line 480, in get_model_version_by_alias
+    response_proto = self._call_endpoint(GetModelVersionByAlias, req_body)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/model_registry/base_rest_store.py", line 42, in _call_endpoint
+    return call_endpoint(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/utils/rest_utils.py", line 594, in call_endpoint
+    response = verify_rest_response(response, endpoint)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/utils/rest_utils.py", line 308, in verify_rest_response
+    raise RestException(json.loads(response.text))
+mlflow.exceptions.RestException: RESOURCE_DOES_NOT_EXIST: Registered Model with name=Iris-LogisticRegression not found
+2025-08-06 06:11:54,475 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-06 06:12:04,489 INFO: Attempt 3/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-06 06:12:04,491 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-06 06:12:04,543 WARNING: --> No registered models found on the MLflow server. [in /app/app/main.py:66]
+2025-08-06 06:12:04,543 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-06 06:12:04,547 ERROR: Attempt 3 failed: RESOURCE_DOES_NOT_EXIST: Registered Model with name=Iris-LogisticRegression not found [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 115, in _download_artifact_from_uri
+    repo = get_artifact_repository(artifact_uri=root_uri, tracking_uri=tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/artifact_repository_registry.py", line 144, in get_artifact_repository
+    return _artifact_repository_registry.get_artifact_repository(artifact_uri, tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/artifact_repository_registry.py", line 82, in get_artifact_repository
+    return repository(artifact_uri, tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 73, in __init__
+    ) = ModelsArtifactRepository._get_model_uri_infos(artifact_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 124, in _get_model_uri_infos
+    name_and_version_or_id = get_model_name_and_version(client, uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/utils/models.py", line 146, in get_model_name_and_version
+    mv = client.get_model_version_by_alias(model_name, model_alias)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/_model_registry/client.py", line 455, in get_model_version_by_alias
+    return self.store.get_model_version_by_alias(name, alias)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/model_registry/rest_store.py", line 480, in get_model_version_by_alias
+    response_proto = self._call_endpoint(GetModelVersionByAlias, req_body)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/model_registry/base_rest_store.py", line 42, in _call_endpoint
+    return call_endpoint(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/utils/rest_utils.py", line 594, in call_endpoint
+    response = verify_rest_response(response, endpoint)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/utils/rest_utils.py", line 308, in verify_rest_response
+    raise RestException(json.loads(response.text))
+mlflow.exceptions.RestException: RESOURCE_DOES_NOT_EXIST: Registered Model with name=Iris-LogisticRegression not found
+2025-08-06 06:12:04,548 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-06 06:12:14,560 INFO: Attempt 4/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-06 06:12:14,563 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-06 06:12:14,575 WARNING: --> No registered models found on the MLflow server. [in /app/app/main.py:66]
+2025-08-06 06:12:14,576 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-06 06:12:14,583 ERROR: Attempt 4 failed: RESOURCE_DOES_NOT_EXIST: Registered Model with name=Iris-LogisticRegression not found [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 115, in _download_artifact_from_uri
+    repo = get_artifact_repository(artifact_uri=root_uri, tracking_uri=tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/artifact_repository_registry.py", line 144, in get_artifact_repository
+    return _artifact_repository_registry.get_artifact_repository(artifact_uri, tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/artifact_repository_registry.py", line 82, in get_artifact_repository
+    return repository(artifact_uri, tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 73, in __init__
+    ) = ModelsArtifactRepository._get_model_uri_infos(artifact_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 124, in _get_model_uri_infos
+    name_and_version_or_id = get_model_name_and_version(client, uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/utils/models.py", line 146, in get_model_name_and_version
+    mv = client.get_model_version_by_alias(model_name, model_alias)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/_model_registry/client.py", line 455, in get_model_version_by_alias
+    return self.store.get_model_version_by_alias(name, alias)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/model_registry/rest_store.py", line 480, in get_model_version_by_alias
+    response_proto = self._call_endpoint(GetModelVersionByAlias, req_body)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/model_registry/base_rest_store.py", line 42, in _call_endpoint
+    return call_endpoint(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/utils/rest_utils.py", line 594, in call_endpoint
+    response = verify_rest_response(response, endpoint)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/utils/rest_utils.py", line 308, in verify_rest_response
+    raise RestException(json.loads(response.text))
+mlflow.exceptions.RestException: RESOURCE_DOES_NOT_EXIST: Registered Model with name=Iris-LogisticRegression not found
+2025-08-06 06:12:14,584 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-06 06:12:24,585 INFO: Attempt 5/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-06 06:12:24,588 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-06 06:12:24,601 WARNING: --> No registered models found on the MLflow server. [in /app/app/main.py:66]
+2025-08-06 06:12:24,602 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-06 06:12:24,610 ERROR: Attempt 5 failed: RESOURCE_DOES_NOT_EXIST: Registered Model with name=Iris-LogisticRegression not found [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 115, in _download_artifact_from_uri
+    repo = get_artifact_repository(artifact_uri=root_uri, tracking_uri=tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/artifact_repository_registry.py", line 144, in get_artifact_repository
+    return _artifact_repository_registry.get_artifact_repository(artifact_uri, tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/artifact_repository_registry.py", line 82, in get_artifact_repository
+    return repository(artifact_uri, tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 73, in __init__
+    ) = ModelsArtifactRepository._get_model_uri_infos(artifact_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 124, in _get_model_uri_infos
+    name_and_version_or_id = get_model_name_and_version(client, uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/utils/models.py", line 146, in get_model_name_and_version
+    mv = client.get_model_version_by_alias(model_name, model_alias)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/_model_registry/client.py", line 455, in get_model_version_by_alias
+    return self.store.get_model_version_by_alias(name, alias)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/model_registry/rest_store.py", line 480, in get_model_version_by_alias
+    response_proto = self._call_endpoint(GetModelVersionByAlias, req_body)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/model_registry/base_rest_store.py", line 42, in _call_endpoint
+    return call_endpoint(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/utils/rest_utils.py", line 594, in call_endpoint
+    response = verify_rest_response(response, endpoint)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/utils/rest_utils.py", line 308, in verify_rest_response
+    raise RestException(json.loads(response.text))
+mlflow.exceptions.RestException: RESOURCE_DOES_NOT_EXIST: Registered Model with name=Iris-LogisticRegression not found
+2025-08-06 06:12:24,612 CRITICAL: --- All attempts to load the model failed. The API will not be able to serve predictions. --- [in /app/app/main.py:87]
+2025-08-07 05:12:45,565 INFO: API Logger is now configured. [in /app/app/main.py:40]
+2025-08-07 05:12:45,565 INFO: --- Starting Model Loading Process using Aliases --- [in /app/app/main.py:55]
+2025-08-07 05:12:45,566 INFO: Attempt 1/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:12:45,566 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:12:50,624 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:12:50,624 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:12:50,625 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:12:50,734 ERROR: Attempt 1 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.'
+2025-08-07 05:12:50,736 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-07 05:13:00,751 INFO: Attempt 2/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:13:00,755 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:13:00,830 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:13:00,830 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:13:00,831 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:13:00,888 ERROR: Attempt 2 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.'
+2025-08-07 05:13:00,888 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-07 05:13:10,899 INFO: Attempt 3/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:13:10,900 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:13:10,934 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:13:10,935 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:13:10,935 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:13:10,968 ERROR: Attempt 3 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.'
+2025-08-07 05:13:10,969 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-07 05:13:20,982 INFO: Attempt 4/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:13:20,983 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:13:21,015 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:13:21,015 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:13:21,015 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:13:21,047 ERROR: Attempt 4 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.'
+2025-08-07 05:13:21,048 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-07 05:13:31,054 INFO: Attempt 5/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:13:31,059 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:13:31,113 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:13:31,114 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:13:31,114 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:13:31,147 ERROR: Attempt 5 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.'
+2025-08-07 05:13:31,147 CRITICAL: --- All attempts to load the model failed. The API will not be able to serve predictions. --- [in /app/app/main.py:87]
+2025-08-07 05:22:17,211 INFO: API Logger is now configured. [in /app/app/main.py:40]
+2025-08-07 05:22:17,212 INFO: --- Starting Model Loading Process using Aliases --- [in /app/app/main.py:55]
+2025-08-07 05:22:17,212 INFO: Attempt 1/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:22:17,212 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:22:17,257 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:22:17,257 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:22:17,257 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:22:17,349 ERROR: Attempt 1 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.'
+2025-08-07 05:22:17,351 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-07 05:22:27,359 INFO: Attempt 2/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:22:27,360 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:22:27,423 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:22:27,423 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:22:27,424 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:22:27,508 ERROR: Attempt 2 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.'
+2025-08-07 05:22:27,508 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-07 05:22:37,510 INFO: Attempt 3/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:22:37,511 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:22:37,599 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:22:37,599 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:22:37,600 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:22:37,634 ERROR: Attempt 3 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.'
+2025-08-07 05:22:37,634 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-07 05:22:47,646 INFO: Attempt 4/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:22:47,648 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:22:47,680 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:22:47,681 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:22:47,695 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:22:47,728 ERROR: Attempt 4 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-a1041ac3cb324f3a849cb600e1bad61c/artifacts/.'
+2025-08-07 05:22:47,729 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-07 05:22:57,735 INFO: Attempt 5/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:22:57,738 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:22:57,798 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:22:57,799 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:22:57,799 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:22:57,803 ERROR: Attempt 5 failed: INVALID_PARAMETER_VALUE: Registered model alias production not found. [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 115, in _download_artifact_from_uri
+    repo = get_artifact_repository(artifact_uri=root_uri, tracking_uri=tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/artifact_repository_registry.py", line 144, in get_artifact_repository
+    return _artifact_repository_registry.get_artifact_repository(artifact_uri, tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/artifact_repository_registry.py", line 82, in get_artifact_repository
+    return repository(artifact_uri, tracking_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 73, in __init__
+    ) = ModelsArtifactRepository._get_model_uri_infos(artifact_uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 124, in _get_model_uri_infos
+    name_and_version_or_id = get_model_name_and_version(client, uri)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/utils/models.py", line 146, in get_model_name_and_version
+    mv = client.get_model_version_by_alias(model_name, model_alias)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/_model_registry/client.py", line 455, in get_model_version_by_alias
+    return self.store.get_model_version_by_alias(name, alias)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/model_registry/rest_store.py", line 480, in get_model_version_by_alias
+    response_proto = self._call_endpoint(GetModelVersionByAlias, req_body)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/model_registry/base_rest_store.py", line 42, in _call_endpoint
+    return call_endpoint(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/utils/rest_utils.py", line 594, in call_endpoint
+    response = verify_rest_response(response, endpoint)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/utils/rest_utils.py", line 308, in verify_rest_response
+    raise RestException(json.loads(response.text))
+mlflow.exceptions.RestException: INVALID_PARAMETER_VALUE: Registered model alias production not found.
+2025-08-07 05:22:57,806 CRITICAL: --- All attempts to load the model failed. The API will not be able to serve predictions. --- [in /app/app/main.py:87]
+2025-08-07 05:29:49,326 INFO: API Logger is now configured. [in /app/app/main.py:40]
+2025-08-07 05:29:49,326 INFO: --- Starting Model Loading Process using Aliases --- [in /app/app/main.py:55]
+2025-08-07 05:29:49,327 INFO: Attempt 1/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:29:49,328 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:29:49,368 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:29:49,368 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:29:49,368 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:29:49,451 ERROR: Attempt 1 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-bb00b3ae9e9c4cb8bd7eab781d42bf0f/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-bb00b3ae9e9c4cb8bd7eab781d42bf0f/artifacts/.'
+2025-08-07 05:29:49,453 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-07 05:29:59,467 INFO: Attempt 2/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:29:59,472 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:29:59,526 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:29:59,526 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:29:59,527 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:29:59,590 ERROR: Attempt 2 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-bb00b3ae9e9c4cb8bd7eab781d42bf0f/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-bb00b3ae9e9c4cb8bd7eab781d42bf0f/artifacts/.'
+2025-08-07 05:29:59,590 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-07 05:30:09,601 INFO: Attempt 3/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:30:09,603 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:30:09,648 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:30:09,649 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:30:09,649 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:30:09,689 ERROR: Attempt 3 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-bb00b3ae9e9c4cb8bd7eab781d42bf0f/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-bb00b3ae9e9c4cb8bd7eab781d42bf0f/artifacts/.'
+2025-08-07 05:30:09,690 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-07 05:30:19,700 INFO: Attempt 4/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:30:19,703 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:30:19,750 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:30:19,751 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:30:19,751 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:30:19,787 ERROR: Attempt 4 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-bb00b3ae9e9c4cb8bd7eab781d42bf0f/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-bb00b3ae9e9c4cb8bd7eab781d42bf0f/artifacts/.'
+2025-08-07 05:30:19,788 INFO: Retrying in 10 seconds... [in /app/app/main.py:89]
+2025-08-07 05:30:29,803 INFO: Attempt 5/5: Connecting to MLflow at http://mlflow-server:5000... [in /app/app/main.py:60]
+2025-08-07 05:30:29,806 INFO: --> Listing all registered models found by the client: [in /app/app/main.py:63]
+2025-08-07 05:30:29,888 INFO: -->   - Found model: 'Iris-LogisticRegression' [in /app/app/main.py:69]
+2025-08-07 05:30:29,889 INFO: -->   - Found model: 'Iris-RandomForest' [in /app/app/main.py:69]
+2025-08-07 05:30:29,889 INFO: Attempting to load model 'Iris-LogisticRegression' with alias 'production'. [in /app/app/main.py:71]
+2025-08-07 05:30:29,922 ERROR: Attempt 5 failed: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-bb00b3ae9e9c4cb8bd7eab781d42bf0f/artifacts/.' [in /app/app/main.py:85]
+Traceback (most recent call last):
+  File "/app/app/main.py", line 72, in <module>
+    model = mlflow.pyfunc.load_model(model_uri=f"models:/{MODEL_NAME}@{MODEL_ALIAS}")
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracing/provider.py", line 439, in wrapper
+    is_func_called, result = True, f(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/pyfunc/__init__.py", line 1127, in load_model
+    local_path = _download_artifact_from_uri(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/tracking/artifact_utils.py", line 119, in _download_artifact_from_uri
+    return repo.download_artifacts(
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/models_artifact_repo.py", line 237, in download_artifacts
+    model_path = self.repo.download_artifacts(artifact_path, dst_path)
+  File "/usr/local/lib/python3.9/site-packages/mlflow/store/artifact/local_artifact_repo.py", line 92, in download_artifacts
+    raise OSError(f"No such file or directory: '{local_artifact_path}'")
+OSError: No such file or directory: '/Users/I343574/Study/MTech/3rd Sem/MLOps/Assigment/code/iris-mlops-project/mlruns/709701051855674736/models/m-bb00b3ae9e9c4cb8bd7eab781d42bf0f/artifacts/.'
+2025-08-07 05:30:29,922 CRITICAL: --- All attempts to load the model failed. The API will not be able to serve predictions. --- [in /app/app/main.py:87]

@@ -11,20 +11,27 @@ services:
     ports:
       # Expose the MLflow UI on your machine at port 5002
       - "5002:5000"
+    volumes:
+      # This makes the MLflow data (your models) persistent across restarts
+      - ./mlruns:/mlruns
     networks:
       - ml-network
 
   # Service 2: The Flask API
   api:
+    # This is the crucial line. It tells docker-compose to use your
+    # official image from Docker Hub for this service during deployment.
+    image: apurbaghosh363/iris-mlops-api:latest
     build:
       context: .
-      dockerfile: Dockerfile # Your existing API Dockerfile
+      dockerfile: Dockerfile
     ports:
-      # Expose the API on your machine at port 8002
       - "8002:8000"
     depends_on:
-      # Tells Docker to start the mlflow-server first
       - mlflow-server
+    volumes:
+      # This makes the API's logs persistent
+      - ./logs:/app/logs
     networks:
       - ml-network
 
