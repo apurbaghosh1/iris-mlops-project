@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 15s # How often Prometheus will check your API's /metrics endpoint
+
+scrape_configs:
+  # A "job" defines a set of targets to monitor. We'll define one for our API.
+  - job_name: 'iris-api-service'
+    # This tells Prometheus to find other containers on the same Docker network.
+    # It's a more advanced setup, but this is the simplest way for now.
+    static_configs:
+      # 'api:8000' is the Docker service name and internal port of your API container.
+      - targets: ['api:8000']

@@ -35,6 +35,33 @@ services:
     networks:
       - ml-network
 
+  # Service 3: prometheus for monitoring
+  # This service will scrape metrics from the API and make them available for Grafana
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      # Mount the configuration file we just created into the container
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - ml-network
+
+  # Service 4: Grafana for visualization
+  # This service provides a web interface for visualizing metrics collected by Prometheus
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - ml-network
+    volumes:
+      # This makes Grafana's data persistent
+      - ./grafana-data:/var/lib/grafana
 # Define the private network for the containers to communicate
 networks:
   ml-network:
