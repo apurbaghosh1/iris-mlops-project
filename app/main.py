@@ -23,6 +23,7 @@ import joblib
 import pandas as pd
 import mlflow
 import subprocess
+import subprocess
 
 # --- Flask and Extension Libraries ---
 from flask import Flask, request, jsonify
@@ -185,19 +186,27 @@ def predict_species(body: PredictionInput):
 
 @app.route("/retrain", methods=['POST'])
 def retrain_model():
-    """An endpoint to trigger the model training script (Bonus Feature)."""
-    logger.info("--- Received request to retrain model. ---")
+    """
+    A simple endpoint to trigger the training script.
+    NOTE: In a real production system, this would be handled by a more robust
+    job queue system like Celery, Airflow, or a serverless function.
+    """
+    logger.info("--- Received request to retrain model ---")
     try:
+        # The script must be available inside the container at this path.
+        # The training script will use whatever version of iris.csv was
+        # copied into the Docker image during the build process.
         script_path = "scripts/train.py"
-        # Use Popen to run the script as a non-blocking background process.
-        # This allows the API to respond immediately without waiting for training to finish.
+        # Use Popen to run the script as a non-blocking background process
         subprocess.Popen(["python", script_path])
-        return jsonify(status="ok", message=f"Started retraining process using '{script_path}'."), 202
+        message = f"Started retraining process using '{script_path}'."
+        logger.info(message)
+        return jsonify(status="ok", message=message), 202
     except Exception as e:
-        logger.error(f"Failed to start retraining process. Error: {e}", exc_info=True)
-        return jsonify(status="error", message=str(e)), 500
-
-
+        error_message = f"Failed to start retraining process. Error: {e}"
+        logger.error(error_message, exc_info=True)
+        return jsonify(status="error", message=error_message), 500
+    
 # This block is only executed when you run `python app/main.py` directly.
 # It is NOT used when the application is run by Gunicorn in the Docker container.
 if __name__ == '__main__':
