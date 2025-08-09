@@ -1,68 +1,101 @@
 # docker-compose.yml
 
+# =================================================================
+# Docker Compose for the MLOps Application Stack
+# =================================================================
+# This file defines the multi-container application, including the
+# MLflow server, the prediction API, and the monitoring stack.
+# Docker Compose reads this file to start, stop, and network all
+# services together as a single, cohesive application.
+# =================================================================
+
+# Specifies the version of the Docker Compose file format.
 version: '3.8'
 
+# Defines all the individual containerized services that make up the application.
 services:
   # Service 1: The MLflow Tracking Server
+  # This container runs the MLflow server, which is responsible for
+  # tracking experiments, storing model artifacts, and managing the model registry.
   mlflow-server:
     build:
       context: .
       dockerfile: mlflow.Dockerfile
     ports:
-      # Expose the MLflow UI on your machine at port 5002
+      # Maps port 5002 on the host machine to port 5000 inside the container.
+      # This allows you to access the MLflow UI from your browser at http://localhost:5002.
       - "5002:5000"
     volumes:
-      # This makes the MLflow data (your models) persistent across restarts
+      # Mounts the local './mlruns' directory into the container at '/mlruns'.
+      # This makes the MLflow database and model artifacts persistent, so data
+      # is not lost when the container is stopped or restarted.
       - ./mlruns:/mlruns
     networks:
       - ml-network
 
-  # Service 2: The Flask API
+  # Service 2: The Flask Prediction API
+  # This container runs the main application that serves model predictions.
   api:
-    # This is the crucial line. It tells docker-compose to use your
-    # official image from Docker Hub for this service during deployment.
+    # Specifies the official image for this service. During deployment,
+    # 'docker-compose pull' will fetch this image from Docker Hub.
     image: apurbaghosh363/iris-mlops-api:latest
     build:
       context: .
       dockerfile: Dockerfile
     ports:
+      # Maps port 8002 on the host machine to port 8000 inside the container.
+      # This makes the API accessible at http://localhost:8002.
       - "8002:8000"
     depends_on:
+      # Ensures that the 'mlflow-server' is started before this 'api' service,
+      # as the API needs to connect to MLflow on startup.
       - mlflow-server
     volumes:
-      # This makes the API's logs persistent
+      # Mounts the local './logs' directory to '/app/logs' inside the container,
+      # making the application's log files persistent.
       - ./logs:/app/logs
+    environment:
+      # Sets an environment variable inside the container. This allows both the
+      # main.py and train.py scripts to find the MLflow server using its
+      # service name on the Docker network.
+      - MLFLOW_TRACKING_URI=http://mlflow-server:5000
     networks:
       - ml-network
 
-  # Service 3: prometheus for monitoring
-  # This service will scrape metrics from the API and make them available for Grafana
+  # Service 3: Prometheus Monitoring Server
+  # This container scrapes and stores time-series metrics from the API's /metrics endpoint.
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
     volumes:
-      # Mount the configuration file we just created into the container
+      # Mounts the local Prometheus configuration file into the container.
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
+      # Exposes the Prometheus UI at http://localhost:9090.
       - "9090:9090"
     networks:
       - ml-network
 
-  # Service 4: Grafana for visualization
-  # This service provides a web interface for visualizing metrics collected by Prometheus
+  # Service 4: Grafana Visualization Dashboard
+  # This container connects to Prometheus to create visual dashboards for the collected metrics.
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
     ports:
+      # Exposes the Grafana UI at http://localhost:3000.
       - "3000:3000"
     depends_on:
       - prometheus
+    volumes:
+      # Mounts a local directory to store Grafana's data (dashboards, data sources).
+      # This makes your Grafana setup persistent.
+      - ./grafana-data:/var/lib/grafana
     networks:
       - ml-network
-    volumes:
-      # This makes Grafana's data persistent
-      - ./grafana-data:/var/lib/grafana
-# Define the private network for the containers to communicate
+
+# Defines the virtual network that all the services will share.
+# This allows containers to communicate with each other using their service names
+# (e.g., the 'api' container can reach the 'mlflow-server' at http://mlflow-server:5000).
 networks:
   ml-network:
     driver: bridge
